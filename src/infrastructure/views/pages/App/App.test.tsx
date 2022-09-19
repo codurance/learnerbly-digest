@@ -1,21 +1,33 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
+import { CSV_RAW_CONTENT, CSV_ROWS } from "../../../../test/mocks";
+import { DataTable } from "../../components/DataTable/DataTable";
+
 import App from "./App";
 
-const CONTENT = "content";
+mockFileReader();
+jest.mock("../../components/DataTable/DataTable");
 
-test("when a file is uploaded its contents should appear on screen", async () => {
-  mockFileReader();
-  render(<App />);
+describe("App", () => {
+  test("when a file is uploaded its contents should be sent to the DataTable", async () => {
+    render(<App />);
 
-  const input = screen.getByTestId("FileInput-hidden-input");
-  fireEvent.change(input, {
-    target: { files: [new File([CONTENT], "name.csv", { type: "csv" })] },
+    const input = screen.getByTestId("FileInput-hidden-input");
+    fireEvent.change(input, {
+      target: {
+        files: [new File([CSV_RAW_CONTENT], "name.csv", { type: "csv" })],
+      },
+    });
+
+    await waitFor(() => {
+      expect(DataTable).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: CSV_ROWS,
+        }),
+        expect.anything()
+      );
+    });
   });
-
-  await waitFor(async () =>
-    expect(await screen.findByText("content")).toBeVisible()
-  );
 });
 
 function mockFileReader() {
