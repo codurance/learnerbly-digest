@@ -16,19 +16,21 @@ export const learnerblyService = (repo: ILearnerblyRepository) => ({
   processRawCSV(csv: string): LearnerblyRecord[] {
     const { rows } = parser.parse(csv);
 
-    return rows.map(
-      hydrateSchema({
-        id: autoIncrementID(0),
-        email: pick("User Email"),
-        name: pick("User First Name"),
-        surname: pick("User Last Name"),
-        currency: pick("Currency"),
-        timeFrame: getTimeFrame,
-        country: pick("User Geographic Location"),
-        budget: pipe(pick("Total Budget Value"), Number),
-        spent: pipe(pick("Total Spent"), Number),
-      })
-    );
+    return rows
+      .filter((row) => row["User Email"] != null)
+      .map(
+        hydrateSchema({
+          id: autoIncrementID(0),
+          email: pick("User Email"),
+          name: pick("User First Name"),
+          surname: pick("User Last Name"),
+          currency: pick("Currency"),
+          timeFrame: getTimeFrame,
+          country: pick("User Geographic Location"),
+          budget: pipe(pick("Total Budget Value"), Number),
+          spent: pipe(pick("Total Spent"), Number),
+        })
+      );
   },
 });
 
