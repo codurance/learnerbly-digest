@@ -1,9 +1,9 @@
 import hydrateSchema from "hydrate-schema";
+import { pipe } from "@typed/functions";
 
 import { ILearnerblyRepository } from "../repositories/learnerbly";
 import { CSV } from "../../infrastructure/instances/csv-parser";
 import { LearnerblyRecord } from "../models/learnerbly-record";
-import { pipe } from "@typed/functions";
 
 const parser = CSV();
 
