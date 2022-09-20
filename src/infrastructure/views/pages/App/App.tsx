@@ -18,9 +18,11 @@ function App() {
       <Main>
         <H1>Learnerbly Digest</H1>
         {rows.length === 0 && <FileInput onLoad={onCSVLoad} />}
-        <ReportContainer>
-          {rows.length > 0 && <DataTable data={rows} />}
-        </ReportContainer>
+        {rows.length > 0 && (
+          <ReportContainer>
+            <DataTable data={rows} />
+          </ReportContainer>
+        )}
       </Main>
     </div>
   );
