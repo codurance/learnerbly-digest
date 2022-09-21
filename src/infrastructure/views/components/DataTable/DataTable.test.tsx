@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { LearnerblyRecord } from "../../../../domain/models/learnerbly-record";
 
-import { CSV_ROWS } from "../../../../test/mocks";
+import { LEARNERBLY_RECORDS } from "../../../../test/mocks";
 import { DataTable } from "./DataTable";
 
 const VISIBLE_ATTRIBUTES = [
@@ -18,9 +18,9 @@ const VISIBLE_ATTRIBUTES = [
 
 describe("Data Tabel", () => {
   test("should show Learnerbly Records", async () => {
-    render(<DataTable data={CSV_ROWS} />);
+    render(<DataTable data={LEARNERBLY_RECORDS} />);
 
-    await Promise.all(CSV_ROWS.map(checkRecordExists));
+    await Promise.all(LEARNERBLY_RECORDS.map(checkRecordExists));
   });
 });
 

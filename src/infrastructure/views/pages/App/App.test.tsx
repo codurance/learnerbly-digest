@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import { CSV_RAW_CONTENT, CSV_ROWS } from "../../../../test/mocks";
+import { CSV_RAW_CONTENT, LEARNERBLY_RECORDS } from "../../../../test/mocks";
 import { DataTable } from "../../components/DataTable/DataTable";
 
 import App from "./App";
@@ -22,7 +22,7 @@ describe("App", () => {
     await waitFor(() => {
       expect(DataTable).toHaveBeenCalledWith(
         expect.objectContaining({
-          data: CSV_ROWS,
+          data: LEARNERBLY_RECORDS,
         }),
         expect.anything()
       );

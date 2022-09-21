@@ -4,7 +4,7 @@ export const CSV_RAW_CONTENT = `User ID,User Email,User First Name,User Last Nam
 4ec682f4-0807-478d-9cf7-83a083c84768,some.one@codurance.com,SOME,ONE,GBP,"Jan 1, 2021","Jan 1, 2022",GB,300,247.8,82.6%
 4ec682f4-0807-478d-9cf7-83a083c84768,other.person@codurance.com,OTHER,PERSON,GBP,"Jan 1, 2022","Jan 1, 2023",GB,300,188.13,62.71%`;
 
-export const CSV_ROWS: LearnerblyRecord[] = [
+export const LEARNERBLY_RECORDS: LearnerblyRecord[] = [
   {
     id: "0",
     email: "some.one@codurance.com",

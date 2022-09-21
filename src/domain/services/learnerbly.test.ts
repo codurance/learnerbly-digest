@@ -1,5 +1,5 @@
 import { mock, mockReset } from "jest-mock-extended";
-import { CSV_RAW_CONTENT, CSV_ROWS } from "../../test/mocks";
+import { CSV_RAW_CONTENT, LEARNERBLY_RECORDS } from "../../test/mocks";
 
 import { ILearnerblyRepository } from "../repositories/learnerbly";
 import { learnerblyService } from "./learnerbly";
@@ -18,7 +18,7 @@ describe("Unit: Learnerbly Service", () => {
 
     const data = await service.loadFile(FILE);
 
-    expect(data).toEqual(CSV_ROWS);
+    expect(data).toEqual(LEARNERBLY_RECORDS);
   });
 
   test("should filter empty rows", async () => {
@@ -27,6 +27,6 @@ describe("Unit: Learnerbly Service", () => {
 
     const data = await service.loadFile(FILE);
 
-    expect(data).toEqual(CSV_ROWS);
+    expect(data).toEqual(LEARNERBLY_RECORDS);
   });
 });
