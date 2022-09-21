@@ -12,6 +12,7 @@ const columns: GridColDef[] = [
   { field: "currency", headerName: "Currency", flex: 2 },
   { field: "budget", headerName: "Budget", flex: 2 },
   { field: "spent", headerName: "Spent", flex: 2 },
+  { field: "budgetUsage", headerName: "Usage (%)", flex: 2 },
 ];
 
 export type DataTableProps = {
@@ -23,7 +24,7 @@ export const DataTable = (props: DataTableProps) => {
     <Container>
       <DataGrid
         initialState={{ columns: { columnVisibilityModel: { id: false } } }}
-        columnBuffer={8}
+        columnBuffer={9}
         columns={columns}
         rows={props.data}
         pageSize={25}

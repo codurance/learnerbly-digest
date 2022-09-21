@@ -15,6 +15,7 @@ export const CSV_ROWS: LearnerblyRecord[] = [
     country: "GB",
     budget: 300,
     spent: 247.8,
+    budgetUsage: 82.6,
   },
   {
     id: "1",
@@ -26,5 +27,6 @@ export const CSV_ROWS: LearnerblyRecord[] = [
     country: "GB",
     budget: 300,
     spent: 188.13,
+    budgetUsage: 62.71,
   },
 ];

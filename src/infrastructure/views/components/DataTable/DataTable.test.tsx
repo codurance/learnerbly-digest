@@ -4,7 +4,17 @@ import { LearnerblyRecord } from "../../../../domain/models/learnerbly-record";
 import { CSV_ROWS } from "../../../../test/mocks";
 import { DataTable } from "./DataTable";
 
-const VISIBLE_ATTRIBUTES = ["email", "name", "surname", "country"];
+const VISIBLE_ATTRIBUTES = [
+  "email",
+  "name",
+  "surname",
+  "currency",
+  "timeFrame",
+  "country",
+  "budget",
+  "spent",
+  "budgetUsage",
+];
 
 describe("Data Tabel", () => {
   test("should show Learnerbly Records", async () => {

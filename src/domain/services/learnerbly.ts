@@ -1,9 +1,11 @@
 import hydrateSchema from "hydrate-schema";
 import { pipe } from "@typed/functions";
 
+import { LearnerblyRecord } from "../models/learnerbly-record";
 import { ILearnerblyRepository } from "../repositories/learnerbly";
 import { CSV } from "../../infrastructure/instances/csv-parser";
-import { LearnerblyRecord } from "../models/learnerbly-record";
+import { calculatePercentage, getRecordTimeFrame } from "../common/calc";
+import config from "../common/config";
 
 const parser = CSV();
 
@@ -16,23 +18,29 @@ export const learnerblyService = (repo: ILearnerblyRepository) => ({
   processRawCSV(csv: string): LearnerblyRecord[] {
     const { rows } = parser.parse(csv);
 
-    return rows
-      .filter((row) => row["User Email"] != null)
-      .map(
-        hydrateSchema({
-          id: autoIncrementID(0),
-          email: pick("User Email"),
-          name: pick("User First Name"),
-          surname: pick("User Last Name"),
-          currency: pick("Currency"),
-          timeFrame: getTimeFrame,
-          country: pick("User Geographic Location"),
-          budget: pipe(pick("Total Budget Value"), Number),
-          spent: pipe(pick("Total Spent"), Number),
-        })
-      );
+    return rows.filter(filterEmptyRows).map(learnerblyRecordFromCSVRow());
   },
 });
+
+const filterEmptyRows = (row: any) => row[config.CSV_COLUMNS.EMAIL] != null;
+
+const learnerblyRecordFromCSVRow = () =>
+  pipe(
+    hydrateSchema({
+      id: autoIncrementID(0),
+      email: pick(config.CSV_COLUMNS.EMAIL),
+      name: pick(config.CSV_COLUMNS.NAME),
+      surname: pick(config.CSV_COLUMNS.SURNAME),
+      currency: pick(config.CSV_COLUMNS.CURRENCY),
+      timeFrame: getRecordTimeFrame,
+      country: pick(config.CSV_COLUMNS.COUNTRY),
+      budget: pipe(pick(config.CSV_COLUMNS.BUDGET), Number),
+      spent: pipe(pick(config.CSV_COLUMNS.SPENT), Number),
+    }),
+    addFields<LearnerblyRecord>((row) => ({
+      budgetUsage: calculatePercentage(row.spent, row.budget),
+    }))
+  );
 
 function autoIncrementID(initialValue: number) {
   return function () {
@@ -45,18 +53,11 @@ function pick(attr: string) {
   return (record: Record<string, any>) => record[attr];
 }
 
-function isDate(date: string): boolean {
-  return /"\w+ [0-9]{1,2}, [0-9]{4}"/g.test(date);
-}
-
-function getYear(date: string): string {
-  return (date.match(/[0-9]{4}/g) || [])[0];
-}
-
-function getTimeFrame(record: Record<string, any>) {
-  const startDate = (record["Start Date"] as string) || "";
-  const endDate = (record["End Date"] as string) || "";
-  if (isDate(startDate) && isDate(endDate)) {
-    return `${getYear(startDate)}-${getYear(endDate)}`;
-  }
+function addFields<T>(fn: (base: Partial<T>) => Partial<T>) {
+  return (base: Partial<T>): T => {
+    return {
+      ...base,
+      ...fn(base),
+    } as T;
+  };
 }

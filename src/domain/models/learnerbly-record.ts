@@ -8,4 +8,5 @@ export type LearnerblyRecord = Record<string, any> & {
   country: string;
   budget: number;
   spent: number;
+  budgetUsage: number;
 };
