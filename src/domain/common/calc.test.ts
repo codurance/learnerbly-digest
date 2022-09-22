@@ -9,6 +9,8 @@ describe("UNIT: calculation utilities", () => {
     expect(calculatePercentage(1, 2)).toBe(50);
     expect(calculatePercentage(3, 4)).toBe(75);
     expect(calculatePercentage(1, 3)).toBe(33.33);
+    expect(calculatePercentage(0, 0)).toBe(0);
+    expect(calculatePercentage(1, 0)).toBe(Infinity);
   });
 
   test("getYearFromRecordDate should extract the year from the csv field", () => {

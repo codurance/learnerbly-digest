@@ -5,6 +5,7 @@ import { DataTable } from "../DataTable/DataTable";
 import { ReportContainer, ReportHeader, ReportContent } from "./styles";
 import { SyntheticEvent, useState } from "react";
 import { TabPanel } from "../TabPanel/TabPanel";
+import { ReportStats } from "../ReportStats/ReportStats";
 
 export type ReportProps = {
   data: LearnerblyRecord[];
@@ -29,7 +30,7 @@ export const Report = (props: ReportProps) => {
           <DataTable data={props.data} />
         </TabPanel>
         <TabPanel value={activeTab} index={1}>
-          <h2>Learnerbly Stats</h2>
+          <ReportStats data={props.data} />
         </TabPanel>
       </ReportContent>
     </ReportContainer>

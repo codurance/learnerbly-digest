@@ -2,6 +2,9 @@ import config from "./config";
 import { isDate } from "./validation";
 
 export function calculatePercentage(a: number = 0, b: number = 0): number {
+  if (a === 0 && b === 0) {
+    return 0;
+  }
   return Number(((a / b) * 100).toFixed(2));
 }
 
