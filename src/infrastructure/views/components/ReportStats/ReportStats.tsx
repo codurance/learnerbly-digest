@@ -1,3 +1,4 @@
+import { columnAverage } from "../../../../domain/common/calc";
 import { LearnerblyRecord } from "../../../../domain/models/learnerbly-record";
 import { Container, ReportStatsHeadline, ReportStatsTable } from "./styles";
 
@@ -34,9 +35,4 @@ function getAverageUsagePercentage(data: LearnerblyRecord[]) {
 
 function getAverageUsage(data: LearnerblyRecord[]) {
   return columnAverage("spent")(data).toFixed(2);
-}
-
-function columnAverage(field: string) {
-  return (records: LearnerblyRecord[]) =>
-    records.reduce((acc, row) => acc + row[field], 0) / records.length;
 }

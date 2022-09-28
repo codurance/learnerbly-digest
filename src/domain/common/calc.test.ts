@@ -1,7 +1,11 @@
+import { LearnerblyRecord } from "../models/learnerbly-record";
 import {
   calculatePercentage,
+  columnAverage,
+  getFieldUniqueValues,
   getRecordTimeFrame,
   getYearFromRecordDate,
+  xprod,
 } from "./calc";
 
 describe("UNIT: calculation utilities", () => {
@@ -24,5 +28,29 @@ describe("UNIT: calculation utilities", () => {
       "End Date": '"Jan 2, 2022"',
     };
     expect(getRecordTimeFrame(record)).toBe("2021-2022");
+  });
+
+  test("columnAverage should calculate the average of a field in a record list", () => {
+    const records = [{ spent: 1 }, { spent: 2 }];
+    expect(columnAverage("spent")(records as LearnerblyRecord[])).toBe(1.5);
+  });
+
+  test("getFieldUniqueValues should return an arry with all the unique values of a record list's column", () => {
+    const records = [{ country: "ES" }, { country: "GB" }, { country: "ES" }];
+    expect(getFieldUniqueValues(records, "country")).toEqual(["ES", "GB"]);
+  });
+
+  test("xprod should return all the possible pairs between two arrays", () => {
+    const countries = ["ES", "PT"];
+    const timeFrames = ["2020", "2021", "2022"];
+
+    expect(xprod(countries, timeFrames)).toEqual([
+      ["ES", "2020"],
+      ["ES", "2021"],
+      ["ES", "2022"],
+      ["PT", "2020"],
+      ["PT", "2021"],
+      ["PT", "2022"],
+    ]);
   });
 });
