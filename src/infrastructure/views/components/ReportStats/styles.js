@@ -9,6 +9,12 @@ export const ReportStatsHeadline = styled.h2`
   margin: 1rem 0 2rem 0;
 `;
 
+export const ReportBody = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
 export const ReportStatsTable = styled.table`
   border: 1px solid ${colors.midGray};
   border-radius: 3px;
@@ -27,3 +33,5 @@ export const ReportStatsTable = styled.table`
     padding: 0.5rem;
   }
 `;
+
+export const GlobalStats = styled.div``;

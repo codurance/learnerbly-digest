@@ -1,6 +1,6 @@
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
-import { learnerblyService } from "../../../../domain/services/learnerbly";
+import { learnerblyService } from "../../../../domain/services/file-load";
 import { fileReader } from "../../../instances/file-reader";
 import { browser } from "../../../repositories/browser";
 import { Button } from "../Button/Button";
