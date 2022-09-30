@@ -1,6 +1,6 @@
 import { mock, mockReset } from "jest-mock-extended";
 
-import { learnerblyService } from "./file-load";
+import { fileManagerService } from "./file-manager";
 import { ILearnerblyRepository } from "../repositories/learnerbly";
 import { CSV_RAW_CONTENT, LEARNERBLY_RECORDS } from "../../test/mocks";
 
@@ -8,7 +8,7 @@ const DUMMY_FILE = new File(["content"], "mock.csv", { type: "csv" });
 
 describe("Unit: Learnerbly Service", () => {
   const repo = mock<ILearnerblyRepository>();
-  const service = learnerblyService(repo);
+  const service = fileManagerService(repo);
 
   beforeEach(() => {
     mockReset(repo);

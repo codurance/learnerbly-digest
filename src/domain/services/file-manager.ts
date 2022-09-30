@@ -9,7 +9,7 @@ import config from "../common/config";
 
 const parser = CSV();
 
-export const learnerblyService = (repo: ILearnerblyRepository) => ({
+export const fileManagerService = (repo: ILearnerblyRepository) => ({
   async loadFile(file: File): Promise<LearnerblyRecord[]> {
     const csv = await repo.loadFile(file);
     return this.processRawCSV(csv);

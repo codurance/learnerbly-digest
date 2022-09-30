@@ -1,12 +1,12 @@
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
-import { learnerblyService } from "../../../../domain/services/file-load";
+import { fileManagerService } from "../../../../domain/services/file-manager";
 import { fileReader } from "../../../instances/file-reader";
 import { browser } from "../../../repositories/browser";
 import { Button } from "../Button/Button";
 import { Container, Input } from "./styles";
 
-const service = learnerblyService(browser(fileReader()));
+const service = fileManagerService(browser(fileReader()));
 
 type FileInputProps = {
   onLoad: (csv: any) => void;
