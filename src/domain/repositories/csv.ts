@@ -1,12 +1,4 @@
-export type CSVParserOptions = {
-  delimiter: string;
-  lineDelimiter: string;
-};
-
-export type CSVParserResult = {
-  header: any[];
-  rows: any[];
-};
+import { CSVParserOptions, CSVParserResult } from "../models/csv";
 
 export interface ICSV {
   parse(data: string, config?: CSVParserOptions): CSVParserResult;

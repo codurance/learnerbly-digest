@@ -1,6 +1,7 @@
 import { curry } from "@typed/curry";
 
-import { CSVParserOptions, ICSV } from "../../domain/repositories/csv";
+import { CSVParserOptions } from "../../domain/models/csv";
+import { ICSV } from "../../domain/repositories/csv";
 
 const defaultParserConfig: CSVParserOptions = {
   lineDelimiter: "\n",
