@@ -86,3 +86,11 @@ export const LEARNERBLY_STATS = {
     stats: BUDGET_USAGE_STATS,
   },
 };
+export const FILE_NAME = "mock.csv";
+export const DUMMY_FILE = new File([CSV_RAW_CONTENT], FILE_NAME, {
+  type: "csv",
+});
+
+export const STORED_FILE = JSON.stringify({
+  [FILE_NAME]: CSV_RAW_CONTENT,
+});

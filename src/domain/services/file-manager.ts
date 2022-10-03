@@ -12,6 +12,7 @@ const parser = CSV();
 export const fileManagerService = (repo: ILearnerblyRepository) => ({
   async loadFile(file: File): Promise<LearnerblyRecord[]> {
     const csv = await repo.loadFile(file);
+    repo.saveToLocalStorage(csv, file.name);
     return this.processRawCSV(csv);
   },
 

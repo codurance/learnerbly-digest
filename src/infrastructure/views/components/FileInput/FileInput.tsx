@@ -2,11 +2,12 @@ import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
 import { fileManagerService } from "../../../../domain/services/file-manager";
 import { fileReader } from "../../../instances/file-reader";
+import { localStorage } from "../../../instances/local-storage";
 import { browser } from "../../../repositories/browser";
 import { Button } from "../Button/Button";
 import { Container, Input } from "./styles";
 
-const service = fileManagerService(browser(fileReader()));
+const service = fileManagerService(browser(fileReader(), localStorage()));
 
 type FileInputProps = {
   onLoad: (csv: any) => void;
