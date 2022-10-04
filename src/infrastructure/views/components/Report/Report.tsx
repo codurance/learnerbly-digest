@@ -2,13 +2,19 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { LearnerblyRecord } from "../../../../domain/models/learnerbly-record";
 import { DataTable } from "../DataTable/DataTable";
-import { ReportContainer, ReportHeader, ReportContent } from "./styles";
+import {
+  ReportContainer,
+  ReportHeader,
+  ReportContent,
+  BackButton,
+} from "./styles";
 import { SyntheticEvent, useState } from "react";
 import { TabPanel } from "../TabPanel/TabPanel";
 import { ReportStats } from "../ReportStats/ReportStats";
 
 export type ReportProps = {
   data: LearnerblyRecord[];
+  onGoBack: () => void;
 };
 
 export const Report = (props: ReportProps) => {
@@ -24,6 +30,7 @@ export const Report = (props: ReportProps) => {
           <Tab label="Data" {...a11yProps(0)} />
           <Tab label="Stats" {...a11yProps(1)} />
         </Tabs>
+        <BackButton onClick={props.onGoBack}>BACK</BackButton>
       </ReportHeader>
       <ReportContent>
         <TabPanel value={activeTab} index={0}>

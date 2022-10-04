@@ -7,3 +7,8 @@ export type CSVParserResult = {
   header: any[];
   rows: any[];
 };
+
+export type StoredFile = {
+  name: string;
+  content: string;
+};

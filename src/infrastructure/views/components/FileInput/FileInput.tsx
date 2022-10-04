@@ -9,7 +9,7 @@ import { Container, Input } from "./styles";
 
 const service = fileManagerService(browser(fileReader(), localStorage()));
 
-type FileInputProps = {
+export type FileInputProps = {
   onLoad: (csv: any) => void;
 };
 

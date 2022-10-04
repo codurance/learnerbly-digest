@@ -41,4 +41,12 @@ describe("Unit: Learnerbly Service", () => {
     );
     expect(data).toEqual(LEARNERBLY_RECORDS);
   });
+
+  test("should process a stored file and get its records", () => {
+    const records = service.loadStoredFile({
+      name: FILE_NAME,
+      content: CSV_RAW_CONTENT,
+    });
+    expect(records).toEqual(LEARNERBLY_RECORDS);
+  });
 });

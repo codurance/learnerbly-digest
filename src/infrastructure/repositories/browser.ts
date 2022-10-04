@@ -26,4 +26,12 @@ export const browser = (
       JSON.stringify(storedFiles)
     );
   },
+  retrieveFiles: () => {
+    const storedContent = localStorage.getItem(LEARNERBLY_DIGEST_STORAGE);
+    const files = storedContent != null ? JSON.parse(storedContent) : {};
+    return Object.keys(files).map((name) => ({
+      name,
+      content: files[name],
+    }));
+  },
 });

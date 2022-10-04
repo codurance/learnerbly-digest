@@ -7,8 +7,13 @@ import { LEARNERBLY_RECORDS } from "../../../../test/mocks";
 jest.mock("../DataTable/DataTable");
 
 describe("ACCEPTANCE: Report", () => {
+  const goBack = jest.fn();
+  beforeEach(() => {
+    goBack.mockReset();
+    render(<Report data={LEARNERBLY_RECORDS} onGoBack={goBack} />);
+  });
+
   test("should show data table when loaded", () => {
-    render(<Report data={LEARNERBLY_RECORDS} />);
     expect(DataTable).toHaveBeenCalledWith(
       expect.objectContaining({ data: LEARNERBLY_RECORDS }),
       expect.anything()
@@ -16,10 +21,14 @@ describe("ACCEPTANCE: Report", () => {
   });
 
   test("should show stats page when clicking on the tab", () => {
-    render(<Report data={LEARNERBLY_RECORDS} />);
-
     fireEvent.click(screen.getByRole("tab", { name: "Stats" }));
 
     expect(screen.getByText(/Learnerbly Stats/i)).toBeVisible();
+  });
+
+  test("should go back when clicking BACK button", () => {
+    fireEvent.click(screen.getByRole("button", { name: "BACK" }));
+
+    expect(goBack).toHaveBeenCalled();
   });
 });

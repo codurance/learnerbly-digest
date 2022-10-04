@@ -6,6 +6,7 @@ import { ILearnerblyRepository } from "../repositories/learnerbly";
 import { CSV } from "../../infrastructure/instances/csv-parser";
 import { calculatePercentage, getRecordTimeFrame } from "../common/calc";
 import config from "../common/config";
+import { StoredFile } from "../models/csv";
 
 const parser = CSV();
 
@@ -13,10 +14,16 @@ export const fileManagerService = (repo: ILearnerblyRepository) => ({
   async loadFile(file: File): Promise<LearnerblyRecord[]> {
     const csv = await repo.loadFile(file);
     repo.saveToLocalStorage(csv, file.name);
-    return this.processRawCSV(csv);
+    return this._processRawCSV(csv);
   },
 
-  processRawCSV(csv: string): LearnerblyRecord[] {
+  retrieveFiles: repo.retrieveFiles,
+
+  loadStoredFile(file: StoredFile): LearnerblyRecord[] {
+    return this._processRawCSV(file.content);
+  },
+
+  _processRawCSV(csv: string): LearnerblyRecord[] {
     const { rows } = parser.parse(csv);
 
     return rows.filter(filterEmptyRows).map(learnerblyRecordFromCSVRow);

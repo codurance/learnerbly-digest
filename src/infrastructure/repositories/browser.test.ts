@@ -63,4 +63,22 @@ describe("UNIT: browser", () => {
       );
     });
   });
+
+  test("should retrieve old files if they exist", () => {
+    const localStorage = mock<ILocalStorage>();
+    const browserManager = browser(fileReader(), localStorage);
+    localStorage.getItem.mockReturnValue(STORED_FILE);
+
+    const files = browserManager.retrieveFiles();
+
+    expect(files).toEqual([
+      {
+        name: FILE_NAME,
+        content: CSV_RAW_CONTENT,
+      },
+    ]);
+    expect(localStorage.getItem).toHaveBeenCalledWith(
+      LEARNERBLY_DIGEST_STORAGE
+    );
+  });
 });
