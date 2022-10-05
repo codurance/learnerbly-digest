@@ -20,7 +20,7 @@ describe("UNIT: Report Stats", () => {
   });
 
   test("should calculate the average usage percentage of the budget", () => {
-    expect(screen.getByText("50.00%")).toBeVisible();
+    expect(screen.getByText("51.67%")).toBeVisible();
   });
 
   test("should send partitioned stats to its table component", () => {
