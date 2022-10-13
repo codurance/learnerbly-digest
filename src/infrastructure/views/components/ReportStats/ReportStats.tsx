@@ -26,7 +26,7 @@ export const ReportStats = (props: ReportStatsProps) => {
     <Container>
       <ReportStatsHeadline>Learnerbly Stats</ReportStatsHeadline>
       <ReportBody>
-        <StatsPartitionTable title="Average Spent" stats={spent} />
+        <StatsPartitionTable title="Average Spent (£)" stats={spent} />
         <StatsPartitionTable title="Average Usage (%)" stats={budgetUsage} />
         <GlobalStats>
           <h4>Global Stats</h4>
